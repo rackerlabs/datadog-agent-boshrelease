@@ -25,7 +25,11 @@ api_key: <%= p('dd.api_key') %>
 <% if_p("dd.hostname") do |hostname| %>
 hostname: <%= hostname %>
 <% end.else do %>
+<% if_p("dd.hostname_prefix") do |prefix| %>
+hostname: <%= prefix %>-<%= spec.name.tr('_', '-') %>-<%= spec.index %>
+<% end.else do %>  
 hostname: <%= spec.name.tr('_', '-') %>-<%= spec.index %>
+<% end %>
 <% end %>
 
 # Set the host's tags
